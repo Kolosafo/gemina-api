@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-d0-pi+$eq@yljc6%dlfcfirlm=ag32$0s=_*#19f6k^lth#rag
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://gemina-api-875e2fb4c9be.herokuapp.com/']
 
 
 # Application definition
@@ -93,8 +93,15 @@ WSGI_APPLICATION = 'gemina_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd57dbmhpm00hvr',
+        'USER': 'ounfyapztdttfx',
+        'PASSWORD': '96d42f0d6c865e99c18b31498d50e7de2655745d1676dac201ca7f5fed22256b',
+        'HOST': 'ec2-34-193-110-25.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
