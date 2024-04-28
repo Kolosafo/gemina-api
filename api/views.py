@@ -43,7 +43,7 @@ def get_user_courses(request):
     response_obj = []
     all_user_courses = Course.objects.filter(user = fetch_user).order_by('-created_at')
     for course in all_user_courses:
-        get_all_course_curriculum = Curriculum.objects.filter(course_obj = course)
+        get_all_course_curriculum = Curriculum.objects.filter(course_obj = course).order_by('id')
         # print("USER COURSES: ",{'course': CourseSerializer(course).data, 'curriculum':CurriculumSerializer(get_all_course_curriculum, many =True).data })
         response_obj.append({'course': CourseSerializer(course).data, 'curriculum':CurriculumSerializer(get_all_course_curriculum, many =True).data})
         
@@ -119,7 +119,7 @@ def get_course_curriculum(request):
     # time.sleep(10)
     parent_course_id = request.data['course_id']
     get_parent_course = Course.objects.get(id=parent_course_id)
-    course_curriculum = Curriculum.objects.filter(course_obj = get_parent_course)
+    course_curriculum = Curriculum.objects.filter(course_obj = get_parent_course).order_by('id')
     try:
         serializer = CurriculumSerializer(course_curriculum, many = True)
         return Response({"data":serializer.data, "status" : status.HTTP_200_OK, "message": "success"}) 
