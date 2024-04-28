@@ -1,8 +1,12 @@
 from django.db import models
 from django.conf import settings
+from django.db.models import Manager
 
 # Create your models here.
 
+class CurriculumManager(Manager):
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('lessons').order_by('lessons__id')
 
 LessonOptionChoices  = (
     ("options", "options"),
@@ -72,6 +76,7 @@ class Curriculum(models.Model):
   exercise = models.CharField(max_length=500, blank=True, null=True)
   learning_type = models.CharField(max_length=500)
   isSection_completed = models.BooleanField(default=False)
+  objects = CurriculumManager()
   def __str__(self):
     return self.section_title
   
