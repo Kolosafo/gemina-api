@@ -79,9 +79,10 @@ def update_profile(request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({
+                "data": serializer.data,
                 "errors": None,
                 "message": "succcess!",
-                "status": status.HTTP_201_CREATED,
+                "status": status.HTTP_200_OK,
             })
     except Exception as e:
         return Response({
