@@ -4,9 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 # from django.contrib.auth.models import User
 from account.models import User
-from .models import LessonObject, Course, Curriculum,SubjectLesson
+from .models import LessonObject, Course, Curriculum,SubjectLesson, QuickLearn
 from rest_framework.permissions import IsAuthenticated
-from . serializers import LessonObjectSerializer, CourseSerializer, CurriculumSerializer
+from . serializers import LessonObjectSerializer, CourseSerializer, CurriculumSerializer, QuickLearnSerializer
 import time
 
 # Create your views here.
@@ -180,18 +180,50 @@ def get_lesson(request):
   
   
   
-# @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
-# def calculate_course_complete_percentage(request):
-#     get_parent_course = Course.objects.get(id=data['course_id'])
-#     get_all_curriculum_under_course = Curriculum.objects.filter(course_obj = get_parent_course)
-#     curriculum_lesson_length = None
-#     for curriculum in get_all_curriculum_under_course:
-#         curriculum_lesson_length = len(curriculum.lessons)
-#     data = request.data
-#     curriculum = Curriculum.objects.get(id=data['curriculum_id'])
-#     curriculum.isSection_completed = True
-#     curriculum.save()
-#     return Response("success") 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_quick_learn(request):
+    user =  request.user
+    data = request.data
+    serializer = QuickLearnSerializer(data=data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=user)
+    return Response(serializer.data, status=status.HTTP_200_OK) 
     
     
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_quick_learns(request):
+    user =  request.user
+    obj = QuickLearn.objects.filter(user=user).order_by('-created_at')
+    serializer = QuickLearnSerializer(obj, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK) 
+    
+    
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def get_single_quick_learn(request):
+    user =  request.user
+    id = request.data['id']
+    obj = QuickLearn.objects.get(user=user, id=id)
+    serializer = QuickLearnSerializer(obj)
+    return Response(serializer.data, status=status.HTTP_200_OK) 
+    
+    
+    
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update_quick_learn(request):
+    user =  request.user
+    data = request.data
+    obj  = QuickLearn.objects.filter(id=data['id'], user=user).first(),
+    obj[0].lessonDetails = data['lessonDetails']
+    obj[0].save()
+    obj_list = QuickLearn.objects.filter(user=user).order_by('-created_at')
+    serializer = QuickLearnSerializer(obj_list, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK) 
+
+   

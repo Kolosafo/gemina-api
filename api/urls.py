@@ -17,7 +17,10 @@ urlpatterns = [
     path('get_course_curriculum/', views.get_course_curriculum, name="get_course_curriculum"),
     path('create_lesson/', views.create_lesson, name="create_lesson"),
     path('get_lesson/', views.get_lesson, name="get_lesson"),
-    # path('update_section_status/', views.update_section_status, name="update_section_status"),
+    path('create_quick_learn/', views.create_quick_learn, name="create_quick_learn"),
+    path('get_user_quick_learns/', views.get_user_quick_learns, name="get_user_quick_learns"),
+    path('get_single_quick_learn/', views.get_single_quick_learn, name="get_single_quick_learn"),
+    path('update_quick_learn/', views.update_quick_learn, name="update_quick_learn"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

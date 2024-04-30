@@ -80,6 +80,13 @@ class Curriculum(models.Model):
   def __str__(self):
     return self.section_title
   
+  def ordered_lessons(self):
+    """
+    Returns the lessons associated with this curriculum
+    in the order of their IDs.
+    """
+    return self.lessons.order_by('id')
+  
 
   
   # /// LESSON OBJECT
@@ -93,3 +100,15 @@ class LessonObject(models.Model):
   lesson_details = models.ManyToManyField(LessonDetails, related_name="lesson_details", blank=True, null=True) 
   def __str__(self):
     return f"{self.course.subject}: {self.lesson_title}"
+  
+  
+  # //// QUICK LEARN OBJECT
+  
+class QuickLearn(models.Model):
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, related_name="student")
+  subject = models.CharField(max_length=500)
+  lessonDetails = models.JSONField(blank=True, null=True)
+  created_at = models.DateTimeField(auto_now_add = True, blank=True, null=True)
+  
+  def __str__(self):
+    return self.subject

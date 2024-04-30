@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import LessonObject, LessonDetails, Curriculum, Course, SubjectLesson
+from .models import LessonObject, LessonDetails, Curriculum, Course, SubjectLesson, QuickLearn
 
 
 
@@ -27,6 +27,15 @@ class CurriculumSerializer(serializers.ModelSerializer):
             lesson_detail = SubjectLesson.objects.create(**lesson_detail_data)  # Create lesson detail
             course_curriculim.lessons.add(lesson_detail)  # Add detail to lesson's M2M field 
         return course_curriculim
+    
+    
+
+class QuickLearnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuickLearn
+        fields = '__all__'
+        
+        
         
 
 class CourseSerializer(serializers.ModelSerializer):
