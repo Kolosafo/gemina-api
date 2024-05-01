@@ -31,7 +31,7 @@ def register(request):
         access_token = str(refresh.access_token)
         # send_mail("Confirm Your Email", email_message, settings.EMAIL_HOST_USER, [
         #     data["email"]], fail_silently=False)
-        return Response({"access": access_token,"data":serializer.data, "status": status.HTTP_201_CREATED})
+        return Response({"refresh":str(refresh), "access": access_token,"data":serializer.data, "status": status.HTTP_201_CREATED})
     else:
         print(serializer.errors)
         return Response({
