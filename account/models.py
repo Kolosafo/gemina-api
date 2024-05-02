@@ -14,6 +14,12 @@ GenderChoices  = (
     ("Prefer not to say", "Prefer not to say"),
 )
 
+LearningPaceChoice  = (
+    ("Fast", "Fast"),
+    ("Slow", "Slow"),
+    ("I don't know", "I don't know"),
+)
+
 
 class User(AbstractUser):
     username = models.CharField(max_length=30, unique=True)
@@ -22,6 +28,7 @@ class User(AbstractUser):
     profile_picture = models.CharField(max_length=500, blank=True, null = True)
     last_name = models.CharField(max_length=200, blank=True, null = True)
     gender = models.CharField(choices=GenderChoices, max_length=200, blank=True, null = True)
+    learningPace = models.CharField(choices=LearningPaceChoice, max_length=200, blank=True, null = True)
     DOB = models.DateField(blank=True, null = True)
     school_level = models.CharField(choices=SchoolLevelChoices, max_length=200, blank=True, null = True)
     grade_level = models.IntegerField( blank=True, null = True)
