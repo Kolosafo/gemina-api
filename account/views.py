@@ -56,6 +56,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['profile_picture'] = user.profile_picture
         token['last_name'] = user.last_name
         token['gender'] = user.gender
+        token['learningPace'] = user.learningPace
         token['DOB'] = str(user.DOB)
         token['school_level'] = user.school_level
         token['grade_level'] = user.grade_level
