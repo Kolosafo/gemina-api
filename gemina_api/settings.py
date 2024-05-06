@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-d0-pi+$eq@yljc6%dlfcfirlm=ag32$0s=_*#19f6k^lth#rag
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://gemina-api-875e2fb4c9be.herokuapp.com/']
+ALLOWED_HOSTS = ['https://octo-api-5295a4ad6fa9.herokuapp.com/']
 
 
 # Application definition
@@ -97,10 +97,10 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
         
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd57dbmhpm00hvr',
-        'USER': 'ounfyapztdttfx',
-        'PASSWORD': '96d42f0d6c865e99c18b31498d50e7de2655745d1676dac201ca7f5fed22256b',
-        'HOST': 'ec2-34-193-110-25.compute-1.amazonaws.com',
+        'NAME': 'd9mu093vcr4o1t',
+        'USER': 'vgkbunvzbhjlyh',
+        'PASSWORD': '2b6ff633474410b5d9bfd9298b5d96fb404c6e320b31cb3417163c7f2113e331',
+        'HOST': 'ec2-52-72-109-141.compute-1.amazonaws.com',
         'PORT': '5432'
     }
 }
